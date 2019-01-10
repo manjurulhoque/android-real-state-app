@@ -1,6 +1,7 @@
 package com.example.rumi.realstate.fragment;
 
 import android.app.ProgressDialog;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -14,6 +15,7 @@ import android.view.ViewGroup;
 import android.widget.Toast;
 
 import com.example.rumi.realstate.R;
+import com.example.rumi.realstate.activity.PropertyDetailActivity;
 import com.example.rumi.realstate.adapter.PropertyRecyclerViewAdapter;
 import com.example.rumi.realstate.interfaces.OnItemClickListener;
 import com.example.rumi.realstate.model.Listing;
@@ -34,7 +36,6 @@ public class HomeFragment extends Fragment {
     private Unbinder unbinder;
     private List<Listing> listings = new ArrayList<Listing>();
     private ProgressDialog progressDialog;
-    private RecyclerView listingRecyclerView;
     private PropertyRecyclerViewAdapter propertyRecyclerViewAdapter;
 
     @Nullable
@@ -44,12 +45,14 @@ public class HomeFragment extends Fragment {
         unbinder = ButterKnife.bind(this, view);
         progressDialog = new ProgressDialog(getContext());
 
-        listingRecyclerView = view.findViewById(R.id.listingRecyclerView);
+        RecyclerView listingRecyclerView = view.findViewById(R.id.listingRecyclerView);
 
         RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(getActivity());
         listingRecyclerView.setLayoutManager(mLayoutManager);
         propertyRecyclerViewAdapter = new PropertyRecyclerViewAdapter(getContext(), listings, listing -> {
-
+            Intent intent = new Intent(new Intent(getContext(), PropertyDetailActivity.class));
+            intent.putExtra("listing", listing);
+            startActivity(intent);
         });
         listingRecyclerView.setAdapter(propertyRecyclerViewAdapter);
 

@@ -37,10 +37,6 @@ public class MainActivity extends AppCompatActivity {
                 transaction.replace(R.id.content_frame, new HomeFragment());
                 transaction.commit();
                 return true;
-            case R.id.navigation_favourite:
-                transaction.replace(R.id.content_frame, new FavouriteFragment());
-                transaction.commit();
-                return true;
             case R.id.navigation_about:
                 transaction.replace(R.id.content_frame, new AboutFragment());
                 transaction.commit();
